@@ -94,3 +94,28 @@ label {
   background-color: white;
   color: #282c34;
 }
+
+.product-description {
+  background: linear-gradient(45deg, #ff8c00, #ffa500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.find-button {
+  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.find-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.4);
+}
