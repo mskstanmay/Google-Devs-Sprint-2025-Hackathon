@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -17,7 +18,7 @@ function convertMarkdownToHtml(markdown) {
     .replace(/\n/g, '<br />');
 }
 
-function App() {
+function MainContent() {
   const [formData, setFormData] = useState({
     category: 'default',
     description: ''
@@ -78,13 +79,15 @@ function App() {
     return (Math.round(Number(result.scores.supplyChain) + Number(result.scores.manufacturing)) / 2);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div style={{ overflow: 'hidden' }}>
       <nav className="navbar" style={{ padding: '0 20px' }}>
-        <a href="/" className="navbar-brand">ESP</a>
+        <Link to="/" className="navbar-brand">ESP</Link>
         <div>
           <button className="navbar-button" onClick={resetPage}>Home</button>
-          <button className="navbar-button">Contact us</button>
+          <button className="navbar-button" onClick={() => navigate('/contactus')}>Contact us</button>
         </div>
       </nav>
       <div className="App" style={{ marginTop: '10px', width: '100%' }}>
@@ -100,10 +103,19 @@ function App() {
                   value={formData.category}
                   onChange={handleChange}
                 >
-                  <option value="default" disabled>Select a category</option>
                   <option value="electronics">Electronics</option>
-                  <option value="clothes">Clothes</option>
-                  <option value="food">Food</option>
+  <option value="clothes">Clothes</option>
+  <option value="food">Food</option>
+  <option value="cosmetics">Cosmetics</option>
+  <option value="household">Household Items</option>
+  <option value="automotive">Automotive Products</option>
+  <option value="toys">Toys & Children's Products</option>
+  <option value="medicines">Medicines & Health Products</option>
+  <option value="plastic">Plastic Goods</option>
+  <option value="cleaning">Cleaning & Detergents</option>
+  <option value="packaging">Packaging Materials</option>
+  <option value="stationery">Stationery & Office Supplies</option>
+  <option value="furniture">Furniture</option>
                 </select>
               </div>
               <div>
@@ -227,6 +239,41 @@ function App() {
         )}
       </div>
     </div>
+  );
+}
+
+function ContactUs() {
+  const navigate = useNavigate();
+  
+  return (
+    <div style={{ overflow: 'hidden' }}>
+      <nav className="navbar" style={{ padding: '0 20px' }}>
+        <Link to="/" className="navbar-brand">ESP</Link>
+        <div>
+          <button className="navbar-button" onClick={() => navigate('/')}>Home</button>
+          <button className="navbar-button" onClick={() => navigate('/contactus')}>Contact us</button>
+        </div>
+      </nav>
+      <div className="App" style={{ marginTop: '10px', width: '100%' }}>
+        <h1 className="title">Contact Us</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainContent />} />
+        <Route path="/contactus" element={<ContactUs />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
