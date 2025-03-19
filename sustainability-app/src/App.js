@@ -399,16 +399,16 @@ function ContactUs() {
           <h2 style={{ color: '#FF8C00', marginBottom: '20px' }}>Contact Information</h2>
           <p style={{ marginBottom: '15px' }}>
             <strong>Email:</strong><br />
-            support@ecoanalytics.com
+            support@ecoa.com
           </p>
           <p style={{ marginBottom: '15px' }}>
             <strong>Phone:</strong><br />
-            (555) 123-4567
+            (###) ####-#### 
           </p>
           <p>
             <strong>Address:</strong><br />
-            123 Eco Street<br />
-            Green City, EC 12345
+            VIT-AP University<br />
+            CB 305
           </p>
         </div>
         <div>
