@@ -19,7 +19,7 @@ function convertMarkdownToHtml(markdown) {
 
 function App() {
   const [formData, setFormData] = useState({
-    category: 'electronics',
+    category: 'default',
     description: ''
   });
   const [result, setResult] = useState(null);
@@ -74,7 +74,10 @@ function App() {
     <div style={{ overflow: 'hidden' }}>
       <nav className="navbar" style={{ padding: '0 20px' }}>
         <a href="/" className="navbar-brand">ESP</a>
-        <button className="navbar-button">Home</button>
+        <div>
+          <button className="navbar-button">Home</button>
+          <button className="navbar-button">Contact us</button>
+        </div>
       </nav>
       <div className="App" style={{ marginTop: '10px', width: '100%' }}>
         <h1 className="title" style={{ marginBottom: '20px' }}>Wanna find out how harmful your product is?</h1>
@@ -89,6 +92,7 @@ function App() {
                   value={formData.category}
                   onChange={handleChange}
                 >
+                  <option value="default" disabled>Select a category</option>
                   <option value="electronics">Electronics</option>
                   <option value="clothes">Clothes</option>
                   <option value="food">Food</option>
