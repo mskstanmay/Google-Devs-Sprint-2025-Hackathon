@@ -1,6 +1,10 @@
 import './App.css';
 import { useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 function convertMarkdownToHtml(markdown) {
   if (!markdown) return '';
@@ -45,23 +49,25 @@ function App() {
       const data = await response.json();
       setResult({
         analysis: data.analysis,
+        scores: {
+          supplyChain: data.scores[0],
+          manufacturing: data.scores[1]
+        },
         loading: false
       });
     } catch (error) {
       console.error('Error:', error);
       setResult({
         analysis: 'Error analyzing product. Please try again.',
+        scores: { supplyChain: 0, manufacturing: 0 },
         loading: false
       });
     }
   };
 
-  const parseScores = (analysis) => {
-    const scores = analysis.split(',').slice(0, 2);
-    return {
-      supplyChain: parseInt(scores[0], 10),
-      manufacturing: parseInt(scores[1], 10)
-    };
+  const getAverageScore = () => {
+    if (!result) return 0;
+    return (Math.round(Number(result.scores.supplyChain) + Number(result.scores.manufacturing)) / 2);
   };
 
   return (
@@ -120,38 +126,80 @@ function App() {
           <div className="result-container">
             <div className="charts-column">
               <div className="chart-wrapper">
-                <PieChart
-                  data={[
-                    {
-                      value: parseScores(result.analysis).supplyChain,
-                      color: '#FF8C00'
+                <Doughnut
+                  data={{
+                    datasets: [{
+                      data: [getAverageScore(), 100 - getAverageScore()],
+                      backgroundColor: ['#FF8C00', '#FFE5B4'],
+                      circumference: 180,
+                      rotation: 270,
+                    }]
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: { display: false },
+                      tooltip: { enabled: false }
                     },
-                    {
-                      value: 100 - parseScores(result.analysis).supplyChain,
-                      color: '#FFE5B4'
-                    }
-                  ]}
-                  label={({ dataEntry }) => dataEntry.value + '%'}
-                  labelStyle={{ fontSize: '5px' }}
+                    cutout: '75%'
+                  }}
                 />
-                <p>Environmental impact by supply chain score</p>
+                <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '15px' }}>
+                  <h3>{getAverageScore()}%</h3>
+                  <p>Overall Environmental Impact</p>
+                </div>
               </div>
               <div className="chart-wrapper">
-                <PieChart
-                  data={[
-                    {
-                      value: parseScores(result.analysis).manufacturing,
-                      color: '#FF8C00'
+                <Doughnut
+                  data={{
+                    datasets: [{
+                      data: [result.scores.supplyChain, 100 - result.scores.supplyChain],
+                      backgroundColor: ['#FF8C00', '#FFE5B4'],
+                      circumference: 180,
+                      rotation: 270,
+                    }]
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: { display: false },
+                      tooltip: { enabled: false }
                     },
-                    {
-                      value: 100 - parseScores(result.analysis).manufacturing,
-                      color: '#FFE5B4'
-                    }
-                  ]}
-                  label={({ dataEntry }) => dataEntry.value + '%'}
-                  labelStyle={{ fontSize: '5px' }}
+                    cutout: '75%'
+                  }}
                 />
-                <p>Environmental impact by manufacturing process score</p>
+                <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '15px' }}>
+                  <h3>{Math.round(result.scores.supplyChain)}%</h3>
+                  <p>Environmental impact by supply chain score</p>
+                </div>
+              </div>
+              
+              <div className="chart-wrapper">
+                <Doughnut
+                  data={{
+                    datasets: [{
+                      data: [result.scores.manufacturing, 100 - result.scores.manufacturing],
+                      backgroundColor: ['#FF8C00', '#FFE5B4'],
+                      circumference: 180,
+                      rotation: 270,
+                    }]
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: { display: false },
+                      tooltip: { enabled: false }
+                    },
+                    cutout: '75%'
+                  }}
+                />
+                <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '15px' }}>
+                  <h3>{Math.round(result.scores.manufacturing)}%</h3>
+                  <p>Environmental impact by manufacturing process score</p>
+                </div>
               </div>
             </div>
             <div className="analysis-column">
