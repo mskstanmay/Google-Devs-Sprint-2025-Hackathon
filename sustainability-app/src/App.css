@@ -119,3 +119,40 @@ label {
   transform: scale(1.05);
   box-shadow: 0 2px 8px rgba(255, 140, 0, 0.4);
 }
+
+.result-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+  padding: 20px;
+}
+
+.charts-column {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.chart-wrapper {
+  text-align: center;
+}
+
+.chart-wrapper p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.analysis-column {
+  flex: 1;
+}
+
+.analysis-content {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+}

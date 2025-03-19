@@ -24,10 +24,12 @@ app.post('/api/analyze-product', async (req, res) => {
     Description: ${description}
     
     Please provide a detailed analysis including:
-    1. Environmental impact score (0-100)
-    2. Main environmental concerns
-    3. Sustainability recommendations
-    Format the response in a clear, structured way.`;
+    1. Environmental impact by supply chain score(0-100)
+    2.Environmental impact by manufacturing process score(0-100)
+
+    3. Main environmental concerns in bullet points
+    4. Sustainability recommendations in points
+    Format the response in a clear, structured way. the first two numbers sepereated by, followed by points 3 and 4`;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
