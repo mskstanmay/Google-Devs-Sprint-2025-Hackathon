@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const genAI = new GoogleGenerativeAI('AIzaSyCoQNsrfCeVwF2lfFr4L40ySuHLSHji1uw');
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 app.post('/api/analyze-product', async (req, res) => {
   try {
