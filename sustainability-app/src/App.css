@@ -62,3 +62,35 @@ select, input {
 label {
   margin-right: 8px;
 }
+
+.navbar {
+  width: 100%;
+  background-color: #282c34;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-button {
+  margin-right: 20px;
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navbar-button:hover {
+  background-color: white;
+  color: #282c34;
+}
