@@ -117,10 +117,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Team
 
-- Project Lead: [Your Name]
-- Frontend Developer: [Name]
-- Backend Developer: [Name]
-- UI/UX Designer: [Name]
+- Project Lead: Msks Tanmay 
+- Frontend Developer: Msks Tanmay
+- Backend Developer: Sameer Wahab
+- UI/UX Designer: Himaja Muppalla
 
 ## 🌐 Links
 
