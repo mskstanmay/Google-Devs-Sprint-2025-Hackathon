@@ -16,26 +16,47 @@ const genAI = new GoogleGenerativeAI('AIzaSyCoQNsrfCeVwF2lfFr4L40ySuHLSHji1uw');
 app.post('/api/analyze-product', async (req, res) => {
   try {
     const { category, description } = req.body;
-   // console.log(genAI.ListModels());
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-001" });
 
     const prompt = `Analyze the environmental impact of this product:
     Category: ${category}
     Description: ${description}
     
-    Please provide a detailed analysis including:
-    1. Environmental impact by supply chain score(0-100)
-    2.Environmental impact by manufacturing process score(0-100)
-
-    3. Main environmental concerns in bullet points
-    4. Sustainability recommendations in points
-    Format the response in a clear, structured way. the first two numbers sepereated by, followed by points 3 and 4`;
+    Please provide a detailed analysis in the following format exactly:
+    First line: Two numbers between 0-100 separated by a comma representing:
+    - Supply chain impact score
+    - Manufacturing process impact score
+    
+    Then provide:
+    - Main environmental concerns in bullet points
+    - Sustainability recommendations in bullet points
+    
+    Example format:
+    75,82
+    Main Environmental Concerns:
+    • Concern 1
+    • Concern 2
+    
+    Sustainability Recommendations:
+    • Recommendation 1
+    • Recommendation 2`;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
+    // console.log(text);
+    // Split the first line to get the scores
+    const lines = text.split('\n');
+    const values = lines[0].slice(3).replace(" ","").split(",");
+    console.log(values);
+    
+    // Join the rest of the analysis
+    const analysis = lines.slice(1).join('\n');
 
-    res.json({ analysis: text });
+    res.json({ 
+      analysis: `${analysis}`,
+      scores:values
+    });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Failed to analyze product' });
