@@ -65,6 +65,14 @@ function App() {
     }
   };
 
+  const resetPage = () => {
+    setFormData({
+      category: 'default',
+      description: ''
+    });
+    setResult(null);
+  };
+
   const getAverageScore = () => {
     if (!result) return 0;
     return (Math.round(Number(result.scores.supplyChain) + Number(result.scores.manufacturing)) / 2);
@@ -75,7 +83,7 @@ function App() {
       <nav className="navbar" style={{ padding: '0 20px' }}>
         <a href="/" className="navbar-brand">ESP</a>
         <div>
-          <button className="navbar-button">Home</button>
+          <button className="navbar-button" onClick={resetPage}>Home</button>
           <button className="navbar-button">Contact us</button>
         </div>
       </nav>
