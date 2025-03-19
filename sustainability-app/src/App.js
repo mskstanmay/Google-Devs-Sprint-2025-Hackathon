@@ -266,9 +266,32 @@ function ContactUs() {
   );
 }
 
+function Header() {
+  return (
+    <header className="header">
+      <div className="header-container">
+        <div className="header-logo">
+          <i className="fas fa-leaf text-green-500 text-2xl"></i>
+          <span>EcoAnalytics</span>
+        </div>
+        <nav className="header-nav">
+          <a href="#">Home</a>
+          <a href="#">Products</a>
+          <a href="#">About</a>
+          <a href="#">My Impact</a>
+        </nav>
+        <div className="header-actions">
+          <i className="fas fa-user"></i>
+        </div>
+      </div>
+    </header>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<MainContent />} />
         <Route path="/contactus" element={<ContactUs />} />

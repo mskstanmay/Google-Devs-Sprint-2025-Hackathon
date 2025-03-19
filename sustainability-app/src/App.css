@@ -172,3 +172,77 @@ label {
   border-radius: 8px;
   text-align: left;
 }
+
+.header {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+}
+
+.header-container {
+  max-width: 7xl;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-logo i {
+  color: #10b981;
+  font-size: 2rem;
+}
+
+.header-logo span {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.header-nav {
+  display: none;
+}
+
+.header-nav a {
+  color: #4b5563;
+  margin-right: 2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.header-nav a:hover {
+  color: #10b981;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-actions i {
+  color: #4b5563;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.header-actions i:hover {
+  color: #10b981;
+}
+
+@media (min-width: 768px) {
+  .header-nav {
+    display: flex;
+  }
+}
